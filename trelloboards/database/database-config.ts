@@ -14,20 +14,37 @@ const options = {
 
 export const dbconnection = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-export type Board = {
+export class Board {
+    constructor(created_at: string, id: number, name: string | null) {
+        this.created_at = created_at;
+        this.id = id;
+        this.name = name;
+    }
     created_at: string
     id: number
     name: string | null
   }
   
-  export type Item = {
+  export class Item {
+    constructor(created_at: string, id: number, list_id: number | null, message: string | null) {
+        this.created_at = created_at;
+        this.id = id;
+        this.list_id = list_id;
+        this.message = message;
+    }
     created_at: string
     id: number
     list_id: number | null
     message: string | null
   }
   
-  export type List = {
+  export class List {
+    constructor(board_id: number | null, created_at: string, id: number, name: string | null) {
+        this.board_id = board_id;
+        this.created_at = created_at;
+        this.id = id;
+        this.name = name;
+    }
     board_id: number | null
     created_at: string
     id: number
