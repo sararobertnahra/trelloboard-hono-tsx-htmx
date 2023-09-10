@@ -9,6 +9,6 @@ export interface DAOFacade {
     insert_list(list: List):  Promise<any>;
     delete_list(list: List):  Promise<any>;
     find_items_by_list(list: List):  Promise<Item[]>;
-    insert_item(item: Item):  Promise<any>;
+    insert_item(item: Item):  Promise<Item>;
     delete_item(item: Item):  Promise<any>;
   }

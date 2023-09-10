@@ -47,14 +47,17 @@ class DAOFacadeImpl implements DAOFacade {
             .from('lists')
             .insert([{ name: list.name, board_id: list.board_id }])
             .select()
-        return res;
+        const { data: lists }: { data: List[] } = await dbconnection
+            .from('lists')
+            .select('*')
+        return lists.sort((a, b) => a.id - b.id).pop()!;
     }
 
     async delete_list(list: List): Promise<any> {
         const res = await dbconnection
             .from('lists')
-            .eq('id', list.id)
             .delete()
+            .eq('id', list.id)
         return res;
     }
 
@@ -66,19 +69,22 @@ class DAOFacadeImpl implements DAOFacade {
         return items;
     }
 
-    async insert_item(item: Item): Promise<any> {
+    async insert_item(item: Item): Promise<Item> {
         const res = await dbconnection
             .from('items')
             .insert([{ message: item.message, list_id: item.list_id }])
             .select()
-        return res;
+        const { data: items }: { data: Item[] } = await dbconnection
+            .from('items')
+            .select('*')
+        return items.sort((a, b) => a.id - b.id).pop()!;
     }
 
     async delete_item(item: Item): Promise<any> {
         const res = await dbconnection
             .from('items')
-            .eq('id', item.id)
             .delete()
+            .eq('id', item.id)
         return res;
     }
 
