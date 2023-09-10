@@ -45,7 +45,7 @@ app.post('/hx/compoments/addnewlist', async (c) => {
     return c.html(
         <html>
             <div id="newlist"></div>
-            <div class="col p-3">
+            <div class="col p-3" id={`list${new_list.id}`}>
                 <ListComponent model={model} list={new_list}/>
             </div>
         </html>
@@ -59,8 +59,8 @@ app.post('/hx/compoments/addnewitem', async (c) => {
     const model = await get_new_app_service()
     return c.html(
         <html>
-            <ItemComponent model={model} item={new_item}/>
             <NewItemComponent model={model} list={model.lists.find(list => list.id === new_item.list_id)} />
+            <ItemComponent model={model} item={new_item}/>
         </html>
     )
 })

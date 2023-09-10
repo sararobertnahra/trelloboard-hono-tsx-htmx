@@ -11,20 +11,26 @@ import { NewItemComponent } from './new-item-component.tsx';
 export const ListComponent = (props: { model: AppModel, list: List }) => {
     const list_id = `#list${props.list.id}`
     return (
-        <div class="card mb-5 p-3 shadow-sm rounded" style="width: 24rem;">
+        <div class="card mb-3 p-3 shadow rounded" style="width: 24rem;">
             <div class="card-body">
-                <h2 class="card-header shadow-sm card-title">{props.list.name}</h2>
-                <form  hx-delete="/hx/components/removelist" hx-target={list_id} hx-swap="outerHTML">
-                    <input type="hidden" name="id" value={props.list.id} />
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                    </button>
-                </form>
+                <div class="row card-header shadow-sm card-title">
+                    <div class="col-10 p-2">
+                        <h2 class="">{props.list.name}</h2>
+                    </div>
+                    <div class="col-2 p-1">
+                        <form hx-delete="/hx/components/removelist" hx-target={list_id} hx-swap="outerHTML">
+                            <input type="hidden" name="id" value={props.list.id} />
+                            <button class="btn btn-light">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
                 <ul class="list-group list-group-flush">
+                    <NewItemComponent model={props.model} list={props.list} />
                     {props.model.items.filter(item => item.list_id === props.list.id).map(item => {
                         return <ItemComponent model={props.model} item={item} />
                     })}
-                    <NewItemComponent model={props.model} list={props.list} />
                 </ul>
             </div>
         </div>
