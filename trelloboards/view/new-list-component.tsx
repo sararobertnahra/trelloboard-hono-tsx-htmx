@@ -8,6 +8,9 @@ import { AppModel } from '../services/app-service.ts';
 export const NewListComponent = (props: { model: AppModel, board: Board }) => {
     return (
         <div class="card p-2 shadow rounded" style="width: 27rem;">
+            <div class="card-header">
+                <h2>Add a new list...</h2>
+            </div>
             <form class="card-body row bg-gray" hx-post="/hx/compoments/addnewlist" hx-target="#newlist" hx-swap="outerHTML">
                 <div class="">
                     <input type="hidden" name="board_id" id="board_id" value={props.board.id} />
